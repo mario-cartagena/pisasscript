@@ -6,6 +6,8 @@ import DetailsPizza from '../pages/DetailsPizza';
 import Cart from '../pages/Cart';
 import Confirmation from '../pages/Confirmation';
 import NotFound from '../../src/components/notFound/NotFound';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AppProvider from '../context/AppContext';
 
 const AppRouter = () => {
   return (
