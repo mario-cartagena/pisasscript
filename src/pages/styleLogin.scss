@@ -1,0 +1,122 @@
+@import '../index.scss';
+
+.form {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/didyub2vb/image/upload/v1685737073/fondo-login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    padding: 2rem;
+}
+
+.form {
+    &__figure {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+
+    &__icon {
+        width: 100px;
+        filter: invert(100%);
+    }
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        font-family: $typografyLogo;
+        font-size: 1.5rem;
+
+        font-weight: bold;
+    }
+
+    &__title {
+        margin-top: 2rem;
+        text-align: justify;
+        font-size: 1.6rem;
+        font-family: $typografyContent;
+        font-weight: bold;
+        margin-bottom: 0;
+
+        &__paragrapho {
+            font-size: 1rem;
+        }
+    }
+
+    &__inputs {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__login {
+        display: flex;
+        flex-direction: row !important;
+        justify-content: center;
+
+        &__icon {
+            font-size: 1rem;
+            padding: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        &__input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #fff;
+            border-radius: 0;
+            padding: 0;
+            color: #fff;
+            width: 280px;
+            padding-bottom: 8px;
+            &__input:active {
+                background-color: transparent;
+            }
+
+            &:focus {
+                outline: none;
+                background-color: transparent;
+            }
+
+            &::placeholder {
+                color: #fff;
+            }
+        }
+
+        &__btn {
+            background-color: #fff;
+            color: black;
+            border: none;
+            width: 100%;
+            padding: .8rem;
+
+            &:focus,
+            &:hover {
+                outline: none;
+                background-color: #f7066c;
+                border: none;
+                color: #fff;
+            }
+        }
+
+        &__registration {
+            text-align: center;
+            &__reestablecer {
+                font-size: 1.2rem;
+            }
+        
+        &__log {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    }
+    }
+}
+
+
+// .form__password {
+//     display: flex;
+//     flex-direction: row;
+// }
