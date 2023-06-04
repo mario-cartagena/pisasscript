@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { getUsers } from '../../src/services/getUsers';
 //import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-//import * as formik from 'formik';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -13,9 +13,8 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Login = () => {
+
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
@@ -25,9 +24,22 @@ const Login = () => {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
       ),
-
   });
 
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers().then((response) => {
+      console.log(response)
+      setUsers(response)
+    })
+  }, [])
+
+  const validateUser = (values) => {
+    console.log(users)
+    return users.some((user) => user.username === values.username && user.password === values.password);
+  }
+ 
   return (
     <div className='form'>
       <div className='form__content'>
@@ -41,7 +53,12 @@ const Login = () => {
           validationSchema={schema}
           onSubmit={(values) => {
             alert(values.username)
-            navigate('search');
+            const isValidUser = validateUser(values);
+            console.log(isValidUser);
+            if (isValidUser) {
+              navigate('search');
+            }
+
           }}
           initialValues={{
             username: '',
@@ -75,10 +92,10 @@ const Login = () => {
               </Row>
 
               <Form.Group className="mb-1" controlId="validationFormik02">
-                <Row  className="mb-1 form__login">
+                <Row className="mb-1 form__login">
                   <div >
-                  <FontAwesomeIcon icon={faLock} className='form__login__icon'/>
-                
+                    <FontAwesomeIcon icon={faLock} className='form__login__icon' />
+
                   </div>
                   <div >
                     <Form.Control type="password"
@@ -100,10 +117,10 @@ const Login = () => {
 
 
               <Button type="submit" className='form__login__btn'>Iniciar sesión</Button>
-             <div className='form__login__registration'>
-              <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
-              <p>¿No tienes una cuenta?</p>
-              <p className='form__login__registration__log'>Registrate aqui</p>
+              <div className='form__login__registration'>
+                <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
+                <p>¿No tienes una cuenta?</p>
+                <p className='form__login__registration__log'>Registrate aqui</p>
               </div>
             </Form>
           )}
