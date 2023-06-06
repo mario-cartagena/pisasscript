@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { getUsers } from '../../src/services/getUsers';
-//import Col from 'react-bootstrap/Col';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
@@ -12,9 +12,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
+import RegisterUser from '../components/login/RegisterUser';
+
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
@@ -39,9 +40,21 @@ const Login = () => {
     console.log(users)
     return users.some((user) => user.username === values.username && user.password === values.password);
   }
+
+  const [showRegister, setShowRegister] = useState(false);
+
+  const handleOpenRegister = () => {
+    console.log('click en register');
+    setShowRegister(true);
+  };
  
   return (
+    <>
+      {showRegister ? ( <RegisterUser />)
+      : (
     <div className='form'>
+    <Row>
+      <Col sm={12} md={8}>
       <div className='form__content'>
         <figure className='form__figure'>
           <img src="https://cdn-icons-png.flaticon.com/128/599/599995.png" alt="" className='form__icon' />
@@ -56,7 +69,7 @@ const Login = () => {
             const isValidUser = validateUser(values);
             console.log(isValidUser);
             if (isValidUser) {
-              navigate('search');
+              navigate('/home');
             }
 
           }}
@@ -83,7 +96,7 @@ const Login = () => {
                         onChange={handleChange}
                         isValid={touched.username && !errors.username}
                         className='form__login__input'
-                        autocomplete="off"
+                        autoComplete="off"
                       />
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -106,7 +119,7 @@ const Login = () => {
                       isValid={touched.password && !errors.password}
                       isInvalid={!!errors.password}
                       className='form__login__input'
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.password}
@@ -120,14 +133,18 @@ const Login = () => {
               <div className='form__login__registration'>
                 <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
                 <p>¿No tienes una cuenta?</p>
-                <p className='form__login__registration__log'>Registrate aqui</p>
+                <p className='form__login__registration__log' onClick={handleOpenRegister}>Registrate aqui</p>
+             
               </div>
             </Form>
           )}
         </Formik>
       </div >
-
-    </div >
+      </Col>
+      </Row>
+      </div >
+      )}
+    </>
   )
 }
 
