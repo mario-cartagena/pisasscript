@@ -13,9 +13,11 @@ import '../../pages/styleLogin.scss'
 import Login from '../../pages/Login';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/createUser';
+import AvatarUpload from './uploadImage/AvatarUpload';
 
 const RegisterUser = () => {
   const navigate = useNavigate();
+  const [avatarUrl, setAvatarUrl] = useState('');
 
 
   const schema = yup.object().shape({
@@ -55,6 +57,7 @@ const RegisterUser = () => {
                   <Formik
                     validationSchema={schema}
                     onSubmit={(values) => {
+                      values.avatarUrl = avatarUrl; // Asigna el valor de avatarUrl al objeto values
                       console.log(values)
                       createUser(values);
                       alert('usuario creado!')
@@ -66,6 +69,7 @@ const RegisterUser = () => {
                       fullName: '',
                       nickname: '',
                       password: '',
+                      avatarUrl: '',
                     }}
                   >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -93,6 +97,8 @@ const RegisterUser = () => {
                             </InputGroup>
                           </div>
                         </Row>
+
+                        <AvatarUpload setAvatarUrl={setAvatarUrl} />
 
                         <Row className="mb-1 form__login" >
                           <div >
