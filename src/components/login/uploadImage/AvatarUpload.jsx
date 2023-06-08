@@ -32,8 +32,8 @@ const AvatarUpload = ({ setAvatarUrl }) => {
 
     const uploadButton = (
         <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <PlusOutlined style={{ color:'#fff' }} />
+            <div style={{ marginTop: 8, color:'#fff' }}>AVATAR</div>
         </div>
     );
 

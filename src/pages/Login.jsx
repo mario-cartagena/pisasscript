@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { getUsers } from '../../src/services/getUsers';
 import Col from 'react-bootstrap/Col';
@@ -13,9 +13,12 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
 import RegisterUser from '../components/login/RegisterUser';
+import { AppContext } from '../context/AppContext';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
+
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
@@ -28,6 +31,7 @@ const Login = () => {
   });
 
   const [users, setUsers] = useState([]);
+  const { setIsLogged } = useContext(AppContext);
 
   useEffect(() => {
     getUsers().then((response) => {
@@ -47,103 +51,122 @@ const Login = () => {
     console.log('click en register');
     setShowRegister(true);
   };
- 
+
+
   return (
     <>
-      {showRegister ? ( <RegisterUser />)
-      : (
-    <div className='form'>
-    <Row>
-      <Col sm={12} md={8}>
-      <div className='form__content'>
-        <figure className='form__figure'>
-          <img src="https://cdn-icons-png.flaticon.com/128/599/599995.png" alt="" className='form__icon' />
-        </figure>
-        <h2>PisassScript</h2>
-        <p className='form__title'>Inicia sesión en tu cuenta</p>
-        <p className='form__title__paragrapho mb-4'>Disfruta de la mejor Pizza creada para las personas amantes del Código</p>
-        <Formik
-          validationSchema={schema}
-          onSubmit={(values) => {
-            alert(values.username)
-            const isValidUser = validateUser(values);
-            console.log(isValidUser);
-            if (isValidUser) {
-              navigate('/home');
-            }
+      {showRegister ? (<RegisterUser />)
+        : (
+          <div className='form'>
+            <Row>
+              <Col sm={12} md={8}>
+                <div className='form__content'>
+                  <figure className='form__figure'>
+                    <img src="https://cdn-icons-png.flaticon.com/128/599/599995.png" alt="" className='form__icon' />
+                  </figure>
+                  <h2>PiSassScript</h2>
+                  <p className='form__title'>Inicia sesión en tu cuenta</p>
+                  <p className='form__title__paragrapho mb-4'>Disfruta de la mejor Pizza creada para las personas amantes del Código</p>
+                  <Formik
+                    validationSchema={schema}
+                    onSubmit={(values) => {
+                      // alert(values.username)
+                      const isValidUser = validateUser(values);
+                      console.log(isValidUser);
+                      if (isValidUser) {
+                        setIsLogged(true)
 
-          }}
-          initialValues={{
-            username: '',
-            password: '',
-          }}
-        >
-          {({ handleSubmit, handleChange, values, touched, errors }) => (
-            <Form noValidate onSubmit={handleSubmit} >
-              <Row className="mb-1 form__login" >
-                <div >
-                  <FontAwesomeIcon icon={faUser} className='form__login__icon' />
-                </div>
-                <div >
-                  <InputGroup className="mb-1">
-                    <Form.Group controlId="validationFormik01">
-                      {/* <Form.Label>First name</Form.Label> */}
-                      <Form.Control
-                        type="text"
-                        name="username"
-                        placeholder='Usuario'
-                        value={values.username}
-                        onChange={handleChange}
-                        isValid={touched.username && !errors.username}
-                        className='form__login__input'
-                        autoComplete="off"
-                      />
-                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    </Form.Group>
-                  </InputGroup>
-                </div>
-              </Row>
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
 
-              <Form.Group className="mb-1" controlId="validationFormik02">
-                <Row className="mb-1 form__login">
-                  <div >
-                    <FontAwesomeIcon icon={faLock} className='form__login__icon' />
+                        Toast.fire({
+                          icon: 'success',
+                          title: '¡Inicio de sesión exitoso!'
+                        }).then(() => {
+                          navigate('/home');
+                        });
+  
+                      }}}
+      
+                    initialValues={{
+                      username: '',
+                      password: '',
+                    }}
+                  >
+                    {({ handleSubmit, handleChange, values, touched, errors }) => (
+                      <Form noValidate onSubmit={handleSubmit} >
+                        <Row className="mb-4 form__login" >
+                          <div >
+                            <FontAwesomeIcon icon={faUser} className='form__login__icon' />
+                          </div>
+                          <div >
+                            <InputGroup className="">
+                              <Form.Group controlId="validationFormik01">
+                                {/* <Form.Label>First name</Form.Label> */}
+                                <Form.Control
+                                  type="text"
+                                  name="username"
+                                  placeholder='Usuario'
+                                  value={values.username}
+                                  onChange={handleChange}
+                                  isValid={touched.username && !errors.username}
+                                  className='form__login__input'
+                                  autoComplete="off"
+                                />
+                                <Form.Control.Feedback className='form__login__errors'>Looks good!</Form.Control.Feedback>
+                              </Form.Group>
+                            </InputGroup>
+                          </div>
+                        </Row>
 
-                  </div>
-                  <div >
-                    <Form.Control type="password"
-                      placeholder="Contraseña"
-                      name="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      isValid={touched.password && !errors.password}
-                      isInvalid={!!errors.password}
-                      className='form__login__input'
-                      autoComplete="off"
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </div>
-                </Row>
-              </Form.Group>
+                        <Form.Group className="" controlId="validationFormik02">
+                          <Row className="mb-3 form__login">
+                            <div >
+                              <FontAwesomeIcon icon={faLock} className='form__login__icon' />
 
+                            </div>
+                            <div >
+                              <Form.Control type="password"
+                                placeholder="Contraseña"
+                                name="password"
+                                value={values.password}
+                                onChange={handleChange}
+                                isValid={touched.password && !errors.password}
+                                isInvalid={!!errors.password}
+                                className='form__login__input'
+                                autoComplete="off"
+                              />
+                              <Form.Control.Feedback type="invalid" className='form__login__errors'>
+                                {errors.password}
+                              </Form.Control.Feedback>
+                            </div>
+                          </Row>
+                        </Form.Group>
 
-              <Button type="submit" className='form__login__btn'>Iniciar sesión</Button>
-              <div className='form__login__registration'>
-                <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
-                <p>¿No tienes una cuenta?</p>
-                <p className='form__login__registration__log' onClick={handleOpenRegister}>Registrate aqui</p>
-             
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div >
-      </Col>
-      </Row>
-      </div >
-      )}
+                        <Button type="submit" className='form__login__btn'>Iniciar sesión</Button>
+                        <div className='form__login__registration'>
+                          <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
+                          <p className='mb-0'>¿No tienes una cuenta?</p>
+                          <p className='form__login__registration__log mt-0' onClick={handleOpenRegister}>Registrate aqui</p>
+
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                </div >
+              </Col>
+            </Row>
+          </div >
+        )}
     </>
   )
 }

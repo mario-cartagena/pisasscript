@@ -14,6 +14,9 @@ import Login from '../../pages/Login';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/createUser';
 import AvatarUpload from './uploadImage/AvatarUpload';
+import Swal from 'sweetalert2';
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 
 const RegisterUser = () => {
   const navigate = useNavigate();
@@ -23,7 +26,6 @@ const RegisterUser = () => {
   const schema = yup.object().shape({
     username: yup.string().required(),
     fullName: yup.string().required(),
-    nickname: yup.string().required(),
     password: yup.string().required('').min(8, 'Password must be at least 8 characters').max(20, 'Password must be at most 20 characters')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -33,6 +35,7 @@ const RegisterUser = () => {
 
 
   const [showLogin, setShowLogin] = useState(false);
+  const { setIsLogged } = useContext(AppContext);
 
   const handleOpenLogin = () => {
     console.log('click en Login');
@@ -48,59 +51,49 @@ const RegisterUser = () => {
             <Row>
               <Col sm={12}>
                 <div className='form__content'>
-                  <figure className='form__figure'>
-                    <img src="https://cdn-icons-png.flaticon.com/128/599/599995.png" alt="" className='form__icon' />
-                  </figure>
-                  <h2>PisassScript</h2>
-                  <p className='form__title'>Regístrate</p>
-                  {/* <p className='form__title__paragrapho mb-4'>Crea una cuenta y disfruta de la mejor Pizza creada para las personas amantes del Código</p> */}
+                  <p className='form__title__register'>Regístrate</p>
                   <Formik
                     validationSchema={schema}
                     onSubmit={(values) => {
                       values.avatarUrl = avatarUrl; // Asigna el valor de avatarUrl al objeto values
                       console.log(values)
                       createUser(values);
-                      alert('usuario creado!')
-                      navigate('/home');
+                      setIsLogged(true)
+
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+
+                      Toast.fire({
+                        icon: 'success',
+                        title: '¡Registro exitoso!'
+                      }).then(() => {
+                        navigate('/home');
+                      });
 
                     }}
+    
                     initialValues={{
-                      username: '',
-                      fullName: '',
-                      nickname: '',
-                      password: '',
                       avatarUrl: '',
+                      fullName: '',
+                      username: '',
+                      password: '',
                     }}
                   >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                       <Form noValidate onSubmit={handleSubmit} >
-                        <Row className="mb-1 form__login" >
-                          <div >
-                            <FontAwesomeIcon icon={faUser} className='form__login__icon' />
-                          </div>
-                          <div >
-                            <InputGroup className="mb-1">
-                              <Form.Group controlId="validationFormik04">
-                                {/* <Form.Label>First name</Form.Label> */}
-                                <Form.Control
-                                  type="text"
-                                  name="username"
-                                  placeholder='Nombre de Usuario'
-                                  value={values.username}
-                                  onChange={handleChange}
-                                  isValid={touched.username && !errors.username}
-                                  className='form__login__input'
-                                  autoComplete="off"
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                              </Form.Group>
-                            </InputGroup>
-                          </div>
-                        </Row>
 
-                        <AvatarUpload setAvatarUrl={setAvatarUrl} />
+                        <AvatarUpload setAvatarUrl={setAvatarUrl} className='avatar__upload' />
 
-                        <Row className="mb-1 form__login" >
+                        <Row className="mb-4 form__login" >
                           <div >
                             <FontAwesomeIcon icon={faUser} className='form__login__icon' />
                           </div>
@@ -118,38 +111,39 @@ const RegisterUser = () => {
                                   className='form__login__input'
                                   autoComplete="off"
                                 />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback className='form__login__errors'>Looks good!</Form.Control.Feedback>
                               </Form.Group>
                             </InputGroup>
                           </div>
                         </Row>
 
-                        <Row className="mb-1 form__login" >
+
+
+                        <Row className="mb-4 form__login" >
                           <div >
                             <FontAwesomeIcon icon={faUser} className='form__login__icon' />
                           </div>
                           <div >
                             <InputGroup className="mb-1">
-                              <Form.Group controlId="validationFormik06">
-                                {/* <Form.Label>First name</Form.Label> */}
+                              <Form.Group controlId="validationFormik04">
                                 <Form.Control
                                   type="text"
-                                  name="nickname"
-                                  placeholder='Apódo'
-                                  value={values.nickname}
+                                  name="username"
+                                  placeholder='Nombre de Usuario'
+                                  value={values.username}
                                   onChange={handleChange}
-                                  isValid={touched.nickname && !errors.nickname}
+                                  isValid={touched.username && !errors.username}
                                   className='form__login__input'
                                   autoComplete="off"
                                 />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback className='form__login__errors'>Looks good!</Form.Control.Feedback>
                               </Form.Group>
                             </InputGroup>
                           </div>
                         </Row>
 
                         <Form.Group className="mb-1" controlId="validationFormik07">
-                          <Row className="mb-1 form__login">
+                          <Row className="mb-4 form__login">
                             <div >
                               <FontAwesomeIcon icon={faLock} className='form__login__icon' />
 
@@ -165,7 +159,7 @@ const RegisterUser = () => {
                                 className='form__login__input'
                                 autoComplete="off"
                               />
-                              <Form.Control.Feedback type="invalid">
+                              <Form.Control.Feedback type="invalid" className='form__login__errors'>
                                 {errors.password}
                               </Form.Control.Feedback>
                             </div>
@@ -175,10 +169,7 @@ const RegisterUser = () => {
 
                         <Button type="submit" className='form__login__btn'>Registrarme</Button>
                         <div className='form__login__registration'>
-                          <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
-                          <p>¿No tienes una cuenta?</p>
                           <p className='form__login__registration__log' onClick={handleOpenLogin}>Inicia Sesión</p>
-
                         </div>
                       </Form>
                     )}
