@@ -11,7 +11,7 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
-const AvatarUpload = ({ setAvatarUrl }) => {
+const AvatarUpload = ({ setAvatar }) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -57,7 +57,7 @@ const AvatarUpload = ({ setAvatarUrl }) => {
             console.log(response.data.url);
 
             const avatarUrlData = response.data.url;
-            setAvatarUrl(avatarUrlData);
+            setAvatar(avatarUrlData);
 
         } catch (error) {
             console.log('Error:', error);

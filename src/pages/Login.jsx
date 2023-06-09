@@ -10,7 +10,7 @@ import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './styleLogin.scss'
+import '../components/login/styleLogin/styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
 import RegisterUser from '../components/login/RegisterUser';
 import { AppContext } from '../context/AppContext';
@@ -31,7 +31,7 @@ const Login = () => {
   });
 
   const [users, setUsers] = useState([]);
-  const { setIsLogged } = useContext(AppContext);
+  const { setIsLogged, userLogged, setUserLogged} = useContext(AppContext);
 
   useEffect(() => {
     getUsers().then((response) => {
@@ -43,6 +43,11 @@ const Login = () => {
   const validateUser = (values) => {
     console.log(users)
     return users.some((user) => user.username === values.username && user.password === values.password);
+  }
+
+  const userFinded = (values) => {
+    console.log(users)
+    return users.find((user) => user.username === values.username && user.password === values.password);
   }
 
   const [showRegister, setShowRegister] = useState(false);
@@ -75,7 +80,7 @@ const Login = () => {
                       console.log(isValidUser);
                       if (isValidUser) {
                         setIsLogged(true)
-
+                        
                         const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
