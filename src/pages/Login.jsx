@@ -10,7 +10,7 @@ import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './styleLogin.scss'
+// import './styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
 import RegisterUser from '../components/login/RegisterUser';
 import { AppContext } from '../context/AppContext';
