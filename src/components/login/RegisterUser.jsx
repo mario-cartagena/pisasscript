@@ -20,7 +20,8 @@ import { AppContext } from '../../context/AppContext';
 
 const RegisterUser = () => {
   const navigate = useNavigate();
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const { userLogged, setUserLogged } = useContext(AppContext);
 
 
   const schema = yup.object().shape({
@@ -55,10 +56,12 @@ const RegisterUser = () => {
                   <Formik
                     validationSchema={schema}
                     onSubmit={(values) => {
-                      values.avatarUrl = avatarUrl; // Asigna el valor de avatarUrl al objeto values
+                      values.avatar = avatar; // Asigna el valor de avatar al objeto values
                       console.log(values)
                       createUser(values);
                       setIsLogged(true)
+                      setUserLogged(values);   
+                      console.log(userLogged)
 
                       const Toast = Swal.mixin({
                         toast: true,
@@ -82,7 +85,7 @@ const RegisterUser = () => {
                     }}
     
                     initialValues={{
-                      avatarUrl: '',
+                      avatar: '',
                       fullName: '',
                       username: '',
                       password: '',
@@ -91,7 +94,7 @@ const RegisterUser = () => {
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                       <Form noValidate onSubmit={handleSubmit} >
 
-                        <AvatarUpload setAvatarUrl={setAvatarUrl} className='avatar__upload' />
+                        <AvatarUpload setAvatar={setAvatar} className='avatar__upload' />
 
                         <Row className="mb-4 form__login" >
                           <div >
