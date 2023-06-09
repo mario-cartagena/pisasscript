@@ -15,8 +15,8 @@ const Login = () => {
     <div>
       {pizzas.map((item) => (
         <>
-          <img src={item.img} alt="" />
           <h1>PisassScript</h1>
+          <img src={item.img.one} alt="" />
         </>
       ))}
     </div>
