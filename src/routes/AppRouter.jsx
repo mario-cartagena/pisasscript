@@ -14,14 +14,14 @@ const AppRouter = () => {
     <BrowserRouter>
       <AppProvider>
         <Routes>
-          <Route path={"/"} element={<Login/>}>
+            <Route path={"/"} element={<Login/>} />
+            <Route path={"login"} element={<Login to="/"/>} />
             <Route path={"home"} element={<Home/>} />
             <Route path={"search"} element={<Search/>}>
               <Route path=':id' Component={<DetailsPizza/>} />
             </Route>
             <Route path={"cart"} element={<Cart/>} />
             <Route path={"confirmation"} element={<Confirmation/>} />
-          </Route>
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </AppProvider>
