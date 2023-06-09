@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
+@import url('./components/home/home.scss');
+@import url('./components/home/header/header.scss');
+@import url('./components/home/footer/footer.scss');
+
 $typografyContent: 'Lato', sans-serif;
 $typografyLogo: 'Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif';
 
