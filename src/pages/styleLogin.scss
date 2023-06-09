@@ -1,11 +1,25 @@
 @import '../index.scss';
 
 .form {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/didyub2vb/image/upload/v1685737073/fondo-login.jpg');
+    //    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/didyub2vb/image/upload/v1685737073/fondo-login.jpg');
+    // background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/didyub2vb/image/upload/v1686111554/fondo-login2_dtm1q3.jpg');
+    background-image: linear-gradient(rgb(67 33 56 / 60%), rgb(55 20 41 / 60%)), url(https://res.cloudinary.com/didyub2vb/image/upload/v1686111554/fondo-login2_dtm1q3.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+}
+
+.form_content {
+
+
     display: flex;
     flex-direction: column;
     color: #fff;
@@ -39,45 +53,72 @@
         font-size: 1.6rem;
         font-family: $typografyContent;
         font-weight: bold;
-        margin-bottom: 0;
+        margin-bottom: .5rem;
+        &__register {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
 
         &__paragrapho {
             font-size: 1rem;
+            text-align: justify;
         }
     }
 
     &__inputs {
         display: flex;
         flex-direction: row;
+        color: #fff;
     }
 
     &__login {
         display: flex;
         flex-direction: row !important;
         justify-content: center;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #fff;
+        font-size: 1.3rem;
 
         &__icon {
             font-size: 1rem;
-            padding: .5rem;
-            margin-bottom: 1rem;
+            margin-right: 24px;
+            padding-bottom: .5rem;
+            // padding: .5rem;
+            // margin-bottom: 1rem;
+        }
+
+        &__errors {
+            max-width: 257px;
+            font-size: 10px;
         }
 
         &__input {
             background-color: transparent;
+            background: transparent;
             border: none;
-            border-bottom: 1px solid #fff;
+            // border-bottom: 1px solid #fff;
             border-radius: 0;
             padding: 0;
             color: #fff;
-            width: 280px;
+            min-width: 257px;
             padding-bottom: 8px;
+
+            .form-control {
+                background: transparent;
+            }
+
             &__input:active {
                 background-color: transparent;
+                color: #fff;
             }
 
             &:focus {
                 outline: none;
                 background-color: transparent;
+                color: #fff;
             }
 
             &::placeholder {
@@ -92,6 +133,9 @@
             width: 100%;
             padding: .8rem;
             border-color: none;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color: gray;
 
             &:focus,
             &:hover {
@@ -104,16 +148,30 @@
 
         &__registration {
             text-align: center;
+            cursor: pointer;
+
             &__reestablecer {
                 font-size: 1.2rem;
             }
-        
-        &__log {
-            font-size: 1.2rem;
-            font-weight: bold;
+
+            &__log {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-top: 2.5rem;
+                cursor: pointer;
+            }
         }
     }
-    }
+}
+
+.ant-upload-list {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-control {
+    background-color: transparent;
+    background: transparent;
 }
 
 
