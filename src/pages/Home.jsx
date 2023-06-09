@@ -3,8 +3,9 @@ import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Home = () => {
-  const {isLogged} = useContext(AppContext);
+  const {isLogged, userLogged} = useContext(AppContext);
   console.log(isLogged);
+  console.log(userLogged);
 
   return (
     <div>Home</div>

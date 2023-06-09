@@ -20,6 +20,8 @@ import Swal from 'sweetalert2';
 const Login = () => {
 
   const navigate = useNavigate();
+  const { setUserLogged } = useContext(AppContext);
+
 
   const schema = yup.object().shape({
     username: yup.string().required(),
@@ -43,6 +45,11 @@ const Login = () => {
   const validateUser = (values) => {
     console.log(users)
     return users.some((user) => user.username === values.username && user.password === values.password);
+  }
+
+  const userFinded = (values) => {
+  const user1= users.find((user) => user.username === values.username && user.password === values.password);
+  setUserLogged(user1);
   }
 
   const [showRegister, setShowRegister] = useState(false);
@@ -75,6 +82,7 @@ const Login = () => {
                       console.log(isValidUser);
                       if (isValidUser) {
                         setIsLogged(true)
+                        userFinded(values);                  
 
                         const Toast = Swal.mixin({
                           toast: true,
