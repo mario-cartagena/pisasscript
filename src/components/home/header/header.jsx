@@ -1,38 +1,30 @@
-import React, {useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getUsers } from "../../../services/getUsers";
-import { NavLink } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
 
 const Header = () => {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const { userLogged } = useContext(AppContext);
+  console.log(userLogged);
 
   useEffect(() => {
     getUsers().then((data) => {
-      console.log(users)
-      setUsers(data)
-    })
-  }, [])
+      console.log(users);
+      setUsers(data);
+    });
+  }, []);
 
-    return(
-        <section className="header">
-            {users.map((users,index)=>(
-           <NavLink className="users" key={index}>
-             <NavLink
-                to={`/users/${users.id}`}
-                state={users}
-             >
-             <div>
-                <h1>Home</h1>
-                <p>¡Qué bueno verte {users.username}!</p>
-             </div>
-                <figure>
-                <img className="header-img" src={users.avatar} alt="user" />
-                </figure>
-             </NavLink>
-            </NavLink> 
-        ))}
-        </section>
-        
-    );
+  return (
+    <section className="header">
+      <div>
+        <h1>Home</h1>
+        <p>¡Qué bueno verte {userLogged.nickname}!</p>
+      </div>
+      <figure>
+        <img className="header-img" src={userLogged.avatar} alt="user" />
+      </figure>
+    </section>
+  );
 };
 
 export default Header;
