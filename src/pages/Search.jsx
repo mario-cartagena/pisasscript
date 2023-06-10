@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../components/search/styleSearch.scss'
 import IconPizza from '../assets/icons/pizza.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { Button, Carousel, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { getPizzas } from '../services/getPizzas';
-import { NavLink } from 'react-router-dom';
 
 const Search = () => {
   const [pizzas, setPizzas] = useState([]);

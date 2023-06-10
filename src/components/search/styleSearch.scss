@@ -1,9 +1,9 @@
-@import '../../index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
 .search{
-    background-color: $backgroundColor;
+    background-color: #fef0ef;
     height: 100vh;
-    font-family: $typografyContent;
+    font-family: 'Lato', sans-serif;
 
     &__header{
         padding: 1.3rem;
