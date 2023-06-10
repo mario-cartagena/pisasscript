@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from '../context/AppContext';
 import Header from "../components/home/header/header";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.css";
@@ -8,6 +9,9 @@ import Footer from "../components/home/footer/footer"
 
 const Home = () => {
     const [pizzas, setPizzas] = useState([]);
+    const {isLogged, userLogged} = useContext(AppContext);
+    console.log(isLogged);
+    console.log(userLogged);
 
     useEffect(() => {
         getPizzas().then((data) => {

@@ -10,7 +10,6 @@ import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import '../components/login/styleLogin/styleLogin.scss'
 import { useNavigate } from 'react-router-dom';
 import RegisterUser from '../components/login/RegisterUser';
 import { AppContext } from '../context/AppContext';
@@ -20,6 +19,10 @@ import Swal from 'sweetalert2';
 const Login = () => {
 
   const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const { setUserLogged, setIsLogged  } = useContext(AppContext);
+  const [showRegister, setShowRegister] = useState(false);
+
 
   const schema = yup.object().shape({
     username: yup.string().required(),
@@ -30,8 +33,6 @@ const Login = () => {
       ),
   });
 
-  const [users, setUsers] = useState([]);
-  const { setIsLogged, userLogged, setUserLogged} = useContext(AppContext);
 
   useEffect(() => {
     getUsers().then((response) => {
@@ -46,11 +47,9 @@ const Login = () => {
   }
 
   const userFinded = (values) => {
-    console.log(users)
-    return users.find((user) => user.username === values.username && user.password === values.password);
+  const user1= users.find((user) => user.username === values.username && user.password === values.password);
+  setUserLogged(user1);
   }
-
-  const [showRegister, setShowRegister] = useState(false);
 
   const handleOpenRegister = () => {
     console.log('click en register');
@@ -80,7 +79,7 @@ const Login = () => {
                       console.log(isValidUser);
                       if (isValidUser) {
                         setIsLogged(true)
-                        
+                        userFinded(values);                  
                         const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',

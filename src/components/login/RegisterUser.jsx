@@ -9,7 +9,6 @@ import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './styleLogin/styleLogin.scss'
 import Login from '../../pages/Login';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/createUser';
@@ -21,6 +20,7 @@ import { AppContext } from '../../context/AppContext';
 const RegisterUser = () => {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState('');
+  const { userLogged, setUserLogged } = useContext(AppContext);
 
 
   const schema = yup.object().shape({
@@ -59,6 +59,8 @@ const RegisterUser = () => {
                       console.log(values)
                       createUser(values);
                       setIsLogged(true)
+                      setUserLogged(values);   
+                      console.log(userLogged)
 
                       const Toast = Swal.mixin({
                         toast: true,
