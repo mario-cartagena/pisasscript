@@ -6,6 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.css";
 import { NavLink } from "react-router-dom";
 import { getPizzas } from "../services/getPizzas";
 import Footer from "../components/home/footer/footer"
+import Carrousel from "../components/home/carousel/Carrousel";
 
 const Home = () => {
     const [pizzas, setPizzas] = useState([]);
@@ -18,8 +19,6 @@ const Home = () => {
         setPizzas(data);
         });
     }, []);
-
-    const formatPriceCard = (price) => price.toLocaleString("es-ES", {style: "decimal", minimunFractionDigits: 0, });
 
   return (
     <section className="home">
@@ -39,48 +38,7 @@ const Home = () => {
                 <h1><b>25% OFF</b></h1>
               </div>
             </Carousel>
-            {
-                    pizzas.map((pizzas, index)=>(
-                        <Carousel className="carousel" showArrows={false} showThumbs={false} showStatus={false} key={index}>
-                            <NavLink
-                                to={`/pizzas/${pizzas.id}`}
-                                state={pizzas}
-                            >
-                                <div className="item-carousel">
-                                    <img src={pizzas.img.one} className="carrousel_pics"/>
-                                    <div className="description">
-                                        <p><b>{pizzas.name}</b></p>
-                                        <span className="price"><b>${formatPriceCard(pizzas.price)}</b> COP</span>
-                                    </div>
-                                </div>
-                            </NavLink>
-                            <NavLink
-                                to={`/pizzas/${pizzas.id}`}
-                                state={pizzas}
-                            >
-                                <div className="item-carousel">
-                                    <img src={pizzas.img.two} className="carrousel_pics"/>
-                                    <div className="description">
-                                        <p><b>{pizzas.name}</b></p>
-                                        <span className="price"><b>${formatPriceCard(pizzas.price)}</b> COP</span>
-                                    </div>
-                                </div>
-                            </NavLink>
-                            <NavLink
-                                to={`/pizzas/${pizzas.id}`}
-                                state={pizzas}
-                            >
-                                <div className="item-carousel">
-                                    <img src={pizzas.img.three} className="carrousel_pics"/>
-                                    <div className="description">
-                                        <p><b>{pizzas.name}</b></p>
-                                        <span className="price"><b>${formatPriceCard(pizzas.price)}</b> COP</span>
-                                    </div>
-                                </div>
-                        </NavLink>
-                    </Carousel>
-                ))
-            }
+            <Carrousel/>
         </div>
         <Footer />
     </section>
