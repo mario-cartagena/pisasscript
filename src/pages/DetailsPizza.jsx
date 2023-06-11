@@ -41,9 +41,10 @@ const DetailsPizza = () => {
   //   navigate(-1);
   // };
   const goBack = () => {
-    const urlWithoutId = window.location.href.split('?')[0]; // Obtén la URL actual sin los parámetros
-    window.history.replaceState({}, document.title, urlWithoutId); // Reemplaza la URL actual sin el parámetro
-    window.history.back(); // Vuelve atrás en la historia del navegador
+    navigate('/home');
+    // const urlWithoutId = window.location.href.split('?')[0]; // Obtén la URL actual sin los parámetros
+    // window.history.replaceState({}, document.title, urlWithoutId); // Reemplaza la URL actual sin el parámetro
+    // window.history.back(); // Vuelve atrás en la historia del navegador
   };
 
 
