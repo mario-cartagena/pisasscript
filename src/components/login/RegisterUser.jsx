@@ -9,7 +9,6 @@ import { Formik } from 'formik';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-// import '../../pages/styleLogin.scss'
 import Login from '../../pages/Login';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/createUser';

@@ -19,7 +19,9 @@ import Swal from 'sweetalert2';
 const Login = () => {
 
   const navigate = useNavigate();
-  const { setUserLogged } = useContext(AppContext);
+  const [users, setUsers] = useState([]);
+  const { setUserLogged, setIsLogged  } = useContext(AppContext);
+  const [showRegister, setShowRegister] = useState(false);
 
 
   const schema = yup.object().shape({
@@ -31,8 +33,6 @@ const Login = () => {
       ),
   });
 
-  const [users, setUsers] = useState([]);
-  const { setIsLogged } = useContext(AppContext);
 
   useEffect(() => {
     getUsers().then((response) => {
@@ -50,8 +50,6 @@ const Login = () => {
   const user1= users.find((user) => user.username === values.username && user.password === values.password);
   setUserLogged(user1);
   }
-
-  const [showRegister, setShowRegister] = useState(false);
 
   const handleOpenRegister = () => {
     console.log('click en register');
@@ -82,7 +80,6 @@ const Login = () => {
                       if (isValidUser) {
                         setIsLogged(true)
                         userFinded(values);                  
-
                         const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
