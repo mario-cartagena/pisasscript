@@ -11,18 +11,17 @@ import AppProvider from '../context/AppContext';
 
 const AppRouter = () => {
   return (
-<BrowserRouter>
+    <BrowserRouter>
       <AppProvider>
         <Routes>
-            <Route path={"/"} element={<Login/>} />
-            <Route path={"login"} element={<Navigate to="/"/>} />
-            <Route path={"home"} element={<Home/>} />
-            <Route path={"search"} element={<Search/>}>
-              <Route path=':id' Component={<DetailsPizza/>} />
-            </Route>
-            <Route path={"cart"} element={<Cart/>} />
-            <Route path={"confirmation"} element={<Confirmation/>} />
-          <Route path="*" element={<NotFound/>} />
+          <Route path={"/"} element={<Login />} />
+          <Route path={"login"} element={<Navigate to="/" />} />
+          <Route path={"home"} element={<Home />} />
+          <Route path={"search"} element={<Search />} />
+          <Route path={"pizzas/:id"} element={<DetailsPizza />} /> {/* Corrección aquí */}
+          <Route path={"cart"} element={<Cart />} />
+          <Route path={"confirmation"} element={<Confirmation />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>

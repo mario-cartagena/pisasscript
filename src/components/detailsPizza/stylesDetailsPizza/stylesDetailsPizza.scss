@@ -1,0 +1,76 @@
+.carousel {
+
+    &__back {
+        position: absolute;
+        top: 10px;
+        left: 2rem;
+        z-index: 99;
+        color: #fff;
+        font-size: 1.5rem;
+    }
+
+
+    &__img {
+        height: 15rem;
+ 
+
+    }
+
+    &__img {
+        background-image: linear-gradient(rgb(67 33 56 / 60%), rgb(55 20 41 / 60%));
+    }
+}
+
+.details {
+    border-radius: 0 0 10px 10px;
+    &__container {
+        position: relative;
+        color: #fff;
+        background-color: #FE1651;        
+
+        &__description {
+            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+            background-color: #252525;
+            border-radius: 0 0 2rem 2rem;
+
+            .price {
+                background-color: #FE1651;
+                padding: 10px 15px;
+                border-radius: 20px;
+                margin-right: 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .review {
+                background-color: #fd7500;
+                padding: 10px 15px;
+                border-radius: 20px;
+                margin-right: 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+  
+        }
+
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &__price-rating {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+        font-size: .7rem;
+    }
+    &__description {
+        justify-content: left;
+
+    }
+    &__title__description {
+        font-weight: bold;
+        margin-bottom: .5rem;
+    }
+}
