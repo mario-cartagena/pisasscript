@@ -38,7 +38,7 @@ const Home = () => {
                 <h1><b>25% OFF</b></h1>
               </div>
             </Carousel>
-            <Carrousel/>
+            <Carrousel data={pizzas}/>
         </div>
         <Footer />
     </section>

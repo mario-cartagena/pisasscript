@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { getPizzas } from "../../../services/getPizzas";
-import { Carousel } from "react-responsive-carousel";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
 
-
-const Carrousel = () => {
-  const [pizzas, setPizzas] = useState([]);
-
-  useEffect(() => {
-    getPizzas().then((data) => {
-      setPizzas(data);
-    });
-  }, []);
+const Carrousel = ({data}) => {
   
   const formatPriceCard = (price) => price.toLocaleString("es-ES", {style: "decimal", minimunFractionDigits: 0, });
 
   return (
     <>
-      {pizzas.map((pizzas, index) => (
+      {data.map((pizzas, index) => (
         <Carousel
           className="carousel"
           showArrows={false}
