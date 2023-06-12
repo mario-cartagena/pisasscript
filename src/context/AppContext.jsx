@@ -10,8 +10,8 @@ const AppProvider = ({children}) => {
   const [users] = useState({});
   const [orderPizza, setOrderPizza] = useState([]);
   const updateOrderPizza = (pizza) => {
-    // setOrderPizza(pizza);
-    setOrderPizza((prevOrderPizza) => [...prevOrderPizza, pizza]);
+    setOrderPizza(pizza);
+    // setOrderPizza((prevOrderPizza) => [...prevOrderPizza, pizza]);
   };
 
   return (

@@ -18,7 +18,7 @@ const Header = () => {
     <section className="header">
       <div>
         <h1>Home</h1>
-        <p>¡Qué bueno verte {userLogged.nickname}!</p>
+        <p>¡Qué bueno verte {userLogged.username}!</p>
       </div>
       <figure>
         <img className="header-img" src={userLogged.avatar} alt="user" />
