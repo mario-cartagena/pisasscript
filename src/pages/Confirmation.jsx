@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Confirmation = () => {
-  
   const navigate = useNavigate();
   
   const handleToHome = () => {
