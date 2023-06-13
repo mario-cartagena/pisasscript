@@ -3,14 +3,12 @@
 El objetivo del proyecto es construir un aplicativo web para la compra de pizzas con registro de usuario e inicio de sesión, enfoque en vista mobile.
 
 ### Vista propuesta mobile:
-![Vista Mobile]![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/ea5acce7-73fc-4698-b735-5a31c4bf839f)
+![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/ea5acce7-73fc-4698-b735-5a31c4bf839f)
 
 
 ### Vista propuesta desktop:
-![Vista Desktop]![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/e88e1613-d16c-4b4f-a7b9-d41e13a0f68d)
+![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/e88e1613-d16c-4b4f-a7b9-d41e13a0f68d)
 
-
-Además, la página web debe cumplir con los siguientes requerimientos: 
 
 ***Herramientas y librerias implementadas*** 
 1. Librería JavaScript React js
@@ -23,6 +21,26 @@ Además, la página web debe cumplir con los siguientes requerimientos:
 8. Implementación de Sweetalert para mostrar las alertas.
 9. Despliegue del aplicativo en vercel y heroku
 
+
+### Flujo de la aplicación:
+
+-Para acceder al menu principal es necesario el  inicio de sesión con email y contraseña, si no se tiene una cuenta se dirige a la sección de registro para la creación de un nuevo usuario con los datos requeridos; imagen o avatar de perfil, nombre de usuario, nombre completo y contraseña cada formulario cuenta con sus respectivas validaciones empleando la libreria yup y formik
+
+-Al aprobar las validaciones correspondientes se notifica el ingreso de sesión y se direcciona al usuario a la vista home, en la cual puede visualizar un saludo personalizando y su imagen de avatar o iniciales de su nombre y apellido si no se proporciona imagen. Al hacer click sobre ella puede visualizar un menú que ofrece el cierre de sesión.
+
+-Asi tambien puede visualizar las pizzas disponibles, con su identificación de tres imagenes, el titulo de la pizza y el precio.
+
+-En el menú de la barra inferior puede encontrar los botones para dirigirse al buscador, al carrito o regresar al home.
+
+-Si el usuario escoge la opción de buscar, se dirige a una pagina donde dispone de un buscador el cual le permite encontrar las coincidencias por nombre o tipo de pizza.
+
+-Al dar click sobre las imagenes, tanto en el home como en el search, el usuario es redirigido a una vista de detalle, donde puede visualizar el nombre, la descripcion, precio comentarios de la pizza y a su vez agregar a la canasta la cantidad de pizzas deseas.
+
+-Cuando se confirma el pagar, el usuario es notificado de la cantidad y pizza agregada y se dirige a la vista de carrito, en la cual visualiza un resumen de su pedido, a través de una imagen, cantidad total y precio total.
+
+-En esta seccion de carrito el usuario puede diligenciar sus datos personales y de pago, gracias a un formulario implementado con formik y sus respectivas validaciones con yup.
+
+-Cuando el usuario haya confirmado el pago, se redirecciona a una página de pedido exitoso.
 
 
 
