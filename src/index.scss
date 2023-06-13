@@ -1,7 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
+@import url('./components/home/home.scss');
+@import url('./components/home/header/header.scss');
+@import url('./components/home/footer/footer.scss');
+@import url('./components/login/stylesLogin/styleLogin.scss');
+@import url('./components/search/styleSearch.scss');
+@import url('./components/detailsPizza/stylesDetailsPizza/stylesDetailsPizza.scss');
+@import url('./components/detailsPizza/stylesDetailsPizza/stylesReviewsPizza.scss');
+@import url('./components/detailsPizza/stylesDetailsPizza/stylesSelectPizza.scss');
+@import url('./components/cart/styleCart.scss');
+@import url('./components/confirmation/styleConfirmation.scss');
+
 $typografyContent: 'Lato', sans-serif;
 $typografyLogo: 'Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif';
+$backgroundColor: #fef0ef;
+
 
 *{
     box-sizing: border-box;
