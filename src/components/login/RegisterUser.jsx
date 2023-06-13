@@ -44,7 +44,6 @@ const RegisterUser = () => {
   const { setIsLogged } = useContext(AppContext);
 
   const handleOpenLogin = () => {
-    console.log('click en Login');
     setShowLogin(true);
   };
 
@@ -177,7 +176,6 @@ const RegisterUser = () => {
                             </div>
                           </Row>
                         </Form.Group>
-
 
                         <Button type="submit" className='form__login__btn'>Registrarme</Button>
                         <div className='form__login__registration'>

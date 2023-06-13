@@ -32,7 +32,6 @@ const DetailsPizza = () => {
 
 
   const pizzaFound = pizzas.find((pizza) => pizza.id === Number(id));
-  console.log(pizzaFound?.img?.one);
 
   const navigate = useNavigate();
 
@@ -84,7 +83,6 @@ const DetailsPizza = () => {
         <ReviewsPizza pizzaFound={pizzaFound} />
 
       </div>
-      {/* <SelectPizza/> */}
       <SelectPizza pizzaFound={pizzaFound} />
     </section>
   );
