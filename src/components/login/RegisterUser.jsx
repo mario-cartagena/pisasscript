@@ -25,8 +25,14 @@ const RegisterUser = () => {
 
   const schema = yup.object().shape({
     username: yup.string().required(),
-    fullName: yup.string().required(),
-    password: yup.string().required('').min(8, 'Password must be at least 8 characters').max(20, 'Password must be at most 20 characters')
+    fullName: yup.string().required('El nombre completo es obligatorio').test('two-words', 'Ingrese Nombre  Apellido', value => {
+      if (value) {
+        const words = value.trim().split(' ');
+        return words.length === 2;
+      }
+      return false;
+    }),
+    password: yup.string().required('').min(8, 'Debe contener al menos 8 caracteres').max(20, 'Puede contener máximo 20 caracateres')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
@@ -110,10 +116,14 @@ const RegisterUser = () => {
                                   value={values.fullName}
                                   onChange={handleChange}
                                   isValid={touched.fullName && !errors.fullName}
+                                  isInvalid={!!errors.fullName}
                                   className='form__login__input'
                                   autoComplete="off"
                                 />
                                 <Form.Control.Feedback className='form__login__errors'>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" className='form__login__errors'>
+                                {errors.fullName}
+                              </Form.Control.Feedback>
                               </Form.Group>
                             </InputGroup>
                           </div>

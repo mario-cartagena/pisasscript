@@ -74,3 +74,14 @@
         margin-bottom: .5rem;
     }
 }
+
+@media (min-width: 768px) {
+    .details__container {
+      background-color: #FE1651;   
+      padding: 0 12rem 0 12rem;
+      height: 100vh;
+    }
+    .carousel__img {
+        height: 20rem;
+    }
+  }

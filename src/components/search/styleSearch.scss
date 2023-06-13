@@ -143,3 +143,16 @@
     }
   }
 }
+
+
+
+@media (min-width: 768px) {
+  .search {
+    padding: 0 4rem 0 4rem;
+  }
+  .carousel {
+    img {
+      max-height: 300px;
+    }
+  }
+}

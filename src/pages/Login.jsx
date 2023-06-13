@@ -99,7 +99,17 @@ const Login = () => {
                           navigate('/home');
                         });
   
-                      }}}
+                      } else {
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'error',
+                          title: '¡Datos incorrectos, Por favor intentalo nuevamente!',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
+                      }
+                    
+                    }}
       
                     initialValues={{
                       username: '',
@@ -161,7 +171,6 @@ const Login = () => {
                           <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
                           <p className='mb-0'>¿No tienes una cuenta?</p>
                           <p className='form__login__registration__log mt-0' onClick={handleOpenRegister}>Registrate aqui</p>
-
                         </div>
                       </Form>
                     )}

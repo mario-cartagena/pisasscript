@@ -1,14 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
+import CircularProgress from '@mui/material/CircularProgress';
+      import Box from '@mui/material/Box';
 
 const Carrousel = ({data}) => {
   
   const formatPriceCard = (price) => price.toLocaleString("es-ES", {style: "decimal", minimunFractionDigits: 0, });
 
   return (
-    <>
-      {data.map((pizzas, index) => (
+    <> 
+      { data ?       
+      data.map((pizzas, index) => (
         <Carousel
           className="carousel"
           showArrows={false}
@@ -56,7 +59,11 @@ const Carrousel = ({data}) => {
             </div>
           </NavLink>
         </Carousel>
-      ))}
+      ))
+      :  <Box sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box>
+}
     </>
   );
 };
