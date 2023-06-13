@@ -1,0 +1,28 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-right: 20px;
+    margin-left: 16px;
+    h1{
+      font-size: 28px;
+      margin: 0;
+      font-family: 'Lato';
+      font-weight: 800;
+      line-height: 40px;
+      line-height: 1.2em;
+    }
+    p{
+        font-family: 'Lato', sans-serif;
+        color: #5D5956;
+    }
+    &-figure{
+        margin: 0;
+    }
+    &-img{
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+    }
+}
