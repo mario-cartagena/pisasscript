@@ -1,3 +1,32 @@
+# PisasScript | Workshop 5
+## Descripción del desarrollo: 
+El objetivo del proyecto es construir un aplicativo web para la compra de pizzas con registro de usuario e inicio de sesión, enfoque en vista mobile.
+
+### Vista propuesta mobile:
+![Vista Mobile]![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/ea5acce7-73fc-4698-b735-5a31c4bf839f)
+
+
+### Vista propuesta desktop:
+![Vista Desktop]![image](https://github.com/mario-cartagena/pisasscript/assets/102397960/e88e1613-d16c-4b4f-a7b9-d41e13a0f68d)
+
+
+Además, la página web debe cumplir con los siguientes requerimientos: 
+
+***Herramientas y librerias implementadas*** 
+1. Librería JavaScript React js
+2. Diseño responsive
+3. Enrutamiento dinámico
+4. Componentes funcionales
+5. Hooks de estado, efecto, personalizados y de React Router.
+6. Peticiones HTTPs con Axios
+7. Implementación de JSON server (API)
+8. Implementación de Sweetalert para mostrar las alertas.
+9. Despliegue del aplicativo en vercel y heroku
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
