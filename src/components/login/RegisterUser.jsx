@@ -32,7 +32,7 @@ const RegisterUser = () => {
       }
       return false;
     }),
-    password: yup.string().required('').min(8, 'Debe contener al menos 8 caracteres').max(20, 'Puede contener máximo 20 caracateres')
+    password: yup.string().required().min(8, 'Debe contener al menos 8 caracteres').max(20, 'Puede contener máximo 20 caracateres')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
@@ -144,10 +144,14 @@ const RegisterUser = () => {
                                   value={values.username}
                                   onChange={handleChange}
                                   isValid={touched.username && !errors.username}
+                                  isInvalid={!!errors.username}
                                   className='form__login__input'
                                   autoComplete="off"
                                 />
                                 <Form.Control.Feedback className='form__login__errors'>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" className='form__login__errors'>
+                                {errors.username}
+                                </Form.Control.Feedback>
                               </Form.Group>
                             </InputGroup>
                           </div>
