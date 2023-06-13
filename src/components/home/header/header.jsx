@@ -84,7 +84,7 @@ export const Header = () => {
       </div>
       <figure onClick={handleMenuLogout}>
         {userLogged && userLogged.avatar ?
-          <img className="header-img" src={userLogged?.avatar} alt="user" />
+          <Avatar className="" src={userLogged?.avatar} alt="user"    sx={{ width: 56, height: 56 }}/>
           :
           <Stack direction="row" spacing={2}>
             <Avatar onClick={handleMenuLogout} {...stringAvatar(`${userLogged?.fullName.toUpperCase()}`)} />
