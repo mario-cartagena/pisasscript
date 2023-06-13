@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import search from "../../../assets/images/search.svg";
 import searchRed from "../../../assets/images/search-red.svg";
 import home from "../../../assets/images/home.svg";
 import homeRed from "../../../assets/images/home-red.svg";
 import store from "../../../assets/images/basket.svg";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
+import Swal from "sweetalert2";
 
 const Footer = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { orderPizza } = useContext(AppContext);
+
+    const handleToCart = () =>{
+        {orderPizza.length > 0 || Object.keys(orderPizza).length > 0 
+            ? navigate("/cart") 
+            : 
+            Swal.fire(
+                'Error!',
+                'Agrega una pizza al carrito de compras para poder ordenar!',
+                'error'
+            )
+        }
+    }
 
     return(
         <>
         <div className="store">
             <div className="outer-circle">
-                <NavLink to="/form">
-                    <figure className="inner-circle">
-                        <img src={store} alt="store"/>
-                    </figure>
-                </NavLink>
+                <figure onClick={handleToCart} className="inner-circle">
+                    <img src={store} alt="store"/>
+                </figure>
             </div>  
         </div>
         <footer className="footer">

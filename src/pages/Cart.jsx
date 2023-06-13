@@ -30,18 +30,13 @@ const Cart = () => {
 
   const sendForm = (data) => {
     console.log(data)
-    Swal.fire(
-      '¡Buen trabajo!',
-      'Haz completado el formulario correctamente!',
-      'success'
-    )
     navigate("/confirmation")
   }
 
   const schema = yup.object({
     name: yup.string()
       .required("El nombre completo es requerido.")
-      .matches(/^[A-Za-z]+$/, "El nombre completo debe contener solo letras.")
+      .matches(/^[a-zA-Z\s]+$/, "El nombre completo debe contener solo letras.")
       .min(3, 'El nombre completo debe tener al menos 3 letras.'),
     cardNumber: yup.string()
       .required("El número de tarjeta de crédito es requerido.")
@@ -56,6 +51,7 @@ const Cart = () => {
       .max(3, 'El código CVV no debe exceder los 3 números.'),
     address: yup.string()
       .required("La dirección es requerida.")
+      .matches(/^[a-zA-Z0-9\s\.,#-]+$/)
   });
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
