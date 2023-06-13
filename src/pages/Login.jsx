@@ -20,7 +20,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const { setUserLogged, setIsLogged  } = useContext(AppContext);
+  const { setUserLogged, setIsLogged } = useContext(AppContext);
   const [showRegister, setShowRegister] = useState(false);
 
 
@@ -47,12 +47,11 @@ const Login = () => {
   }
 
   const userFinded = (values) => {
-  const user1= users.find((user) => user.username === values.username && user.password === values.password);
-  setUserLogged(user1);
+    const user1 = users.find((user) => user.username === values.username && user.password === values.password);
+    setUserLogged(user1);
   }
 
   const handleOpenRegister = () => {
-    console.log('click en register');
     setShowRegister(true);
   };
 
@@ -74,12 +73,12 @@ const Login = () => {
                   <Formik
                     validationSchema={schema}
                     onSubmit={(values) => {
-                      // alert(values.username)
+
                       const isValidUser = validateUser(values);
                       console.log(isValidUser);
                       if (isValidUser) {
                         setIsLogged(true)
-                        userFinded(values);                  
+                        userFinded(values);
                         const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
@@ -98,9 +97,19 @@ const Login = () => {
                         }).then(() => {
                           navigate('/home');
                         });
-  
-                      }}}
-      
+
+                      } else {
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'error',
+                          title: '¡Datos incorrectos, Por favor intentalo nuevamente!',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
+                      }
+
+                    }}
+
                     initialValues={{
                       username: '',
                       password: '',
@@ -115,7 +124,6 @@ const Login = () => {
                           <div >
                             <InputGroup className="">
                               <Form.Group controlId="validationFormik01">
-                                {/* <Form.Label>First name</Form.Label> */}
                                 <Form.Control
                                   type="text"
                                   name="username"
@@ -136,7 +144,6 @@ const Login = () => {
                           <Row className="mb-3 form__login">
                             <div >
                               <FontAwesomeIcon icon={faLock} className='form__login__icon' />
-
                             </div>
                             <div >
                               <Form.Control type="password"
@@ -161,7 +168,6 @@ const Login = () => {
                           <p className='mt-3 mb-4 form__login__registration__reestablecer'>Restablecer contraseña</p>
                           <p className='mb-0'>¿No tienes una cuenta?</p>
                           <p className='form__login__registration__log mt-0' onClick={handleOpenRegister}>Registrate aqui</p>
-
                         </div>
                       </Form>
                     )}
