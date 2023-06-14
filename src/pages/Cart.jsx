@@ -51,7 +51,6 @@ const Cart = () => {
       .max(3, 'El código CVV no debe exceder los 3 números.'),
     address: yup.string()
       .required("La dirección es requerida.")
-      .matches(/^[a-zA-Z0-9\s\.,#-]+$/)
   });
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
